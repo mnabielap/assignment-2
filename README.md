@@ -20,7 +20,7 @@ Dalam pengaplikasinya dapat diawali oleh *request* dari *user* untuk aplikasi in
 
 ### Penggunaan Virtual Environment
 
-Virtual Environment adalah alat yang membantu menjaga `dependencies` tetap diperlukan dan proyek tetap terisolasi. Jika kita ingin menginstal new library dan menulis `pip install name_of_library` di terminal tanpa mengaktifkan environment, semua paket akan diinstal secara global yang bukan *good practice* jika kita bekerja dengan proyek yang berbeda di komputer kita. Dengan demikian, jika kita ingin menjalankan django app tanpa menggunakan virtual environment bisa saja tetapi kita harus menyesuaikan python dan library version dengan di requirements.txt.
+Virtual Environment adalah alat yang membantu menjaga `dependencies` tetap diperlukan dan proyek tetap terisolasi. Jika kita ingin menginstal new library dan menulis `pip install name_of_library` di terminal tanpa mengaktifkan environment, semua paket akan diinstal secara global yang bukan *good practice* jika kita bekerja dengan proyek yang berbeda di komputer kita. Dengan demikian, jika kita ingin menjalankan django app tanpa menggunakan virtual environment bisa saja tetapi kita harus menyesuaikan python dan library version dengan di `requirements.txt`.
 
 Untuk membuat *environment* baru, buka terminal baru dan temukan folder tempat kita ingin menyimpan proyek kita. Di dalam direktori itu jalankan perintah `python -m venv name_of_the_environment`. Setelah membuat environment kita dapat mengaktifkannya dengan cara `env\Scripts\activate.bat`. Virtual Environment ini berguna jika kita tidak ingin menginstall *requirements* secara global atau hanya pada *project* yang ingin kita jalankan.
 
