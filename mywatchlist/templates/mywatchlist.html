@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <nav class = "navbar navbar-expand-sm navbar-dark bg-secondary">
+        <div class = "collapse navbar-collapse" id = "navbarSupportedContent">
+            <ul class = "navbar-nav mr-auto">
+                <li class = "nav-item">
+                    <a class = "nav-link active" href = "">Watchlist</a>
+                </li>
+                <li class = "nav-item">
+                    <a class = "nav-link" href = "{% url 'show_xml' %}">View in XML</a>
+                </li>
+                <li class = "nav-item ">
+                    <a class = "nav-link" href = "{% url 'show_json' %}">View in JSON</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+	
+	<h1>Assignment 3 PBP</h1>
+	
+	<h5>Name: </h5>
+	<p>{{nama}}</p>
+
+	<h5>Student ID: </h5>
+	<p>{{npm}}</p>
+
+    <h3>{% if movie_watched >= movie_not_watched %}     
+			<p style="color:green;">
+				{{ "Selamat, kamu sudah banyak menonton!" }}
+			</p> 
+		{% else %} 
+			<p style="color:red;">
+				{{ "Wah, kamu masih sedikit menonton!" }}
+			</p> 
+	{% endif %}</h3>
+
+    <table class="table">
+        <thead class = "thead-light">
+        <tr>
+            <th class="text-left">Watched</th>
+            <th class="text-left">Title</th>
+            <th class="text-left">Rating</th>
+            <th class="text-left">Released Date</th>
+            <th class="text-left">Review</th>
+        </tr>
+        </thead>
+        <tbody>
+            
+            {% for movie in watchlist %}
+            <tr>
+              <td>{% if movie.watched %} True {% else %} False {% endif %}</td>
+              <td>{{movie.title}}</td>
+              <td>{{movie.rating}}</td>
+              <td>{{movie.release_date}}</td>
+              <td>{{movie.review}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr/>
+</div>
+
+{% endblock content %}
