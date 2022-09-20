@@ -8,7 +8,7 @@ Muhammad Nabiel Andityo Purnomo - 2106750465
 
 ### Link to Deployed App
 
-[LINK HEROKU](https://assignment-2-nabiel.herokuapp.com/katalog/)
+[LINK HEROKU](https://assignment-pbp-nabiel.herokuapp.com/katalog/)
 
 ### Cara Kerja Django
 
