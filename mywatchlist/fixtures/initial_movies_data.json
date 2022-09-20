@@ -5,7 +5,7 @@
         "fields": {
             "watched": true,
             "title": "Avengers Endgame",
-            "rating": 8,
+            "rating": 4,
             "release_date": "2019-04-24",
             "review": "This film is an emotional rollercoaster with some of the coolest superhero plot lines ever drawn up. It's straight up the most epic Marvel film that will probably ever be created."
         }
@@ -16,7 +16,7 @@
         "fields": {
             "watched": true,
             "title": "Back to the Future",
-            "rating": 9,
+            "rating": 5,
             "release_date": "1985-07-03",
             "review": "Back To The Future is such an inventive and exciting piece of filmmaking that it is impossible to forget about it. The casting of every character involved was absolutely perfect, and the performances were spectacular."
         }
@@ -27,7 +27,7 @@
         "fields": {
             "watched": true,
             "title": "The Dark Knight",
-            "rating": 8,
+            "rating": 5,
             "release_date": "2008-07-18",
             "review": "This is the best comic book movie of all time. A dark, gritty, and realistic look on how superheroes would act and how they can remain unidentified."
         }
@@ -38,7 +38,7 @@
         "fields": {
             "watched": true,
             "title": "Harry Potter and the Deathly Hallows: Part 2",
-            "rating": 8,
+            "rating": 4,
             "release_date": "2011-07-15",
             "review": "The conclusion to a ten year epic, Harry Potter and the Deathly Hallows - Part 2 is not only suitably action-packed, but also an incredibly emotional and almost tear"
         }
@@ -49,7 +49,7 @@
         "fields": {
             "watched": true,
             "title": "No Time to Die",
-            "rating": 9,
+            "rating": 4,
             "release_date": "2021-09-30",
             "review": "A bold and beautiful and ending to the Daniel Craig era and one of the best Bond entries I've seen."
         }
@@ -60,7 +60,7 @@
         "fields": {
             "watched": true,
             "title": "Jurassic World Dominion",
-            "rating": 7,
+            "rating": 3,
             "release_date": "2022-06-08",
             "review": "Not the strongest of the Jurassic sequels, in fact arguably one of the poorest next to Lost World."
         }
@@ -71,7 +71,7 @@
         "fields": {
             "watched": true,
             "title": "Kingsman: The Secret Service",
-            "rating": 9,
+            "rating": 4,
             "release_date": "2015-02-11",
             "review": "Kingsman is a secret spy organization not connected to any government working in the shadows with no rewards and no fame."
         }
@@ -82,7 +82,7 @@
         "fields": {
             "watched": true,
             "title": "Men in Black III",
-            "rating": 8,
+            "rating": 4,
             "release_date": "2012-05-12",
             "review": "This part of the Men in Black series is my favorite. I liked everything and the end was ..."
         }
@@ -93,7 +93,7 @@
         "fields": {
             "watched": true,
             "title": "Coco",
-            "rating": 10,
+            "rating": 5,
             "release_date": "2017-11-22",
             "review": "Stunning, beautiful, colorful, powerful, sad, happy. A joy of a ride."
         }
@@ -104,7 +104,7 @@
         "fields": {
             "watched": true,
             "title": "Star Wars Episode III : Revenge of the Sith ",
-            "rating": 9,
+            "rating": 5,
             "release_date": "2005-05-19",
             "review": "While it may stumble in some departments, Revenge of the Sith is much more emotional and powerful film then we have seen before in the Star Wars saga."
         }
