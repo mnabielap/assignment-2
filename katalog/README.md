@@ -12,7 +12,7 @@ Muhammad Nabiel Andityo Purnomo - 2106750465
 
 ### Cara Kerja Django
 
-![Bagan Django](https://github.com/mnabielap/assignment-2/blob/main/assignment2_img.gif)
+![Bagan Django](https://github.com/mnabielap/assignment-2/img/assignment2_img.gif)
 
 Django didasarkan pada arsitektur MVT (Model-View-Template). Dimana, **MVT** adalah pola desain perangkat lunak untuk mengembangkan aplikasi web. Model akan bertindak sebagai *interface data developer*. Model ini akan bertanggung jawab untuk menjaga data. Ini adalah *logical data structure* di balik seluruh aplikasi dan diwakili oleh *database* (umumnya *database* relasional seperti MySql, Postgres). Views adalah user interface, apa yang user lihat di browser saat user me-*render* situs web. Itu diwakili oleh HTML atau dengan kata lain views merupakan tempat algoritma yang akan melakukan proses berdasarkan *request* dan *response* untuk menjalankan aplikasi tersebut. Template terdiri dari *static part* dari *output* HTML yang diinginkan serta beberapa sintaks khusus yang menjelaskan bagaimana *dynamic content* akan dimasukkan. 
 
