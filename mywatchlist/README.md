@@ -32,7 +32,7 @@ mekanisme ini maka data dari *database* JSON tidak bisa ditampilkan di sisi *fro
 
 ### Step-by-step implementation
 
-1. Pertama-tama saya membuat aplikasi baru oleh command yang telah disiapkan django, yakni `python manage.py startapp mywatchlist`
+1. Pertama-tama saya membuat aplikasi baru oleh *command* yang telah disiapkan django, yakni `python manage.py startapp mywatchlist`
 
 2. Setelah itu, saya menambahkan `mywatchlist` ke dalam `INSTALLED_APPS` pada `project_django/settings.py`
 	```
@@ -148,16 +148,16 @@ Gunanya untuk menjadikan tampilan webpage kepada pengguna.
 
 9. Membuat test unit untuk mengecek apakah terdapat masalah, dengan cara
 	- membuat fungsi didalam file `mywatchlist/tests.py` untuk *response test* setiap *page* dari mywatchlist
-	- menjalankan command `python manage.py collectstatic` to gather all static files into a folder called staticfiles in our project root directory.
-	- menjalankan command `python manage.py test mywatchlist` untuk memulai menjalankan *response test*
+	- menjalankan *command* `python manage.py collectstatic` *to gather all static files into a folder called staticfiles in our project root directory*.
+	- menjalankan *command* `python manage.py test mywatchlist` untuk memulai menjalankan *response test*
 
-10. Untuk load data dari database `initial_movies_data.json`, saya menggunakan `command`
+10. Untuk load data dari database `initial_movies_data.json`, saya menggunakan *command*
 	`python manage.py loaddata initial_movies_data.json`
 	
-11. Menambahkan command diatas kedalam `Procfile` agar Heroku dapat membaca file database.
+11. Menambahkan command diatas kedalam `Procfile` agar Heroku dapat membaca *database file*.
 
-12. Deploy to Heroku.
-Karena menggunakan *repository* assignment-2 maka deploy cukup dilakukan dengan push to github.
+12. *Deploy to Heroku*.
+Karena menggunakan *repository* assignment-2 maka *deploy* cukup dilakukan dengan *push to* github.
 Lalu, membuka tab `Actions` dan dalam bagian workflow lakukan `Re-run all jobs` dengan menunggu kurang dari 5 menit 
 akhirnya aplikasi saya dapat ditampilkan dengan alamat https://assignment-pbp-nabiel.herokuapp.com/mywatchlist/
 
