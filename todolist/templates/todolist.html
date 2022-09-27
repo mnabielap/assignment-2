@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class = "todolist_page">
+	<h5>Current User: </h5>
+	<b>{{username}}</b>
+	<br> <br>
+	<button><a href="{% url 'todolist:create_task' %}">Create Task</a></button>
+
+	<table>
+		<tr>
+		<th>Date Created</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Status</th>
+		<th>Actions</th>
+		</tr>
+		{% for task in tasks %}
+		<tr>
+			<th>{{task.date}}</th>
+			<th>{{task.title}}</th>
+			<th>{{task.description}}</th>
+				{% if task.is_finished %}
+					<th>Completed</th>
+				{% else %}
+					<th>In Progress</th>
+				{% endif %}
+			<th>
+				<form method="post" action="{% url "todolist:update-task" task.id %}" >
+					{% csrf_token %}
+					<button class="btn btn-info btn-sm" type="submit" name="update">
+						{% if task.is_finished %} Mark Not Completed {% else %} Mark Completed {% endif %}
+					</button>
+				</form>
+				<form method="post" action="{% url "todolist:delete-task" task.id %}" >
+					{% csrf_token %}
+					<button class="btn btn-info btn-sm" type="submit" name="delete">
+						Delete
+					</button>
+				</form>
+			</th>
+		</tr>
+		{% endfor %}
+	</table>
+	<h5>Last session login: {{ last_login }}</h5>
+	<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+</div>
+{% endblock content %}
