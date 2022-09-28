@@ -118,14 +118,14 @@ Selanjutnya, data-data tersebut yang terdapat pada database akan diambil agar da
 
 	Membuat routing tersebut dapat dilakukan dengan mengambahkan `urlpatterns` pada `todolist/urls.py` dengan
 	```python
-		urlpatterns = [
-			path('', show_todolist, name='show_todolist'),		# berisi halaman utama yang memuat tabel task.
-			path('register/', register, name='register'),		# berisi form registrasi akun.
-			path('login/', login_user, name='login'),		# berisi form login
-			path('logout/', logout_user, name='logout'),		# mekanisme logout
-			path('create-task/', create_task, name='create_task'),	# berisi form pembuatan task
-			path('delete-task/<int:id>/', delete_task, name='delete-task'),		# mekanisme delete task
-			path('update-task/<int:id>', update_status, name='update-task'),	# mekanisme update status task
+	urlpatterns = [
+		path('', show_todolist, name='show_todolist'),		# berisi halaman utama yang memuat tabel task.
+		path('register/', register, name='register'),		# berisi form registrasi akun.
+		path('login/', login_user, name='login'),		# berisi form login
+		path('logout/', logout_user, name='logout'),		# mekanisme logout
+		path('create-task/', create_task, name='create_task'),	# berisi form pembuatan task
+		path('delete-task/<int:id>/', delete_task, name='delete-task'),		# mekanisme delete task
+		path('update-task/<int:id>', update_status, name='update-task'),	# mekanisme update status task
 	]
 	```
 	
