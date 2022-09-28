@@ -86,7 +86,7 @@ Selanjutnya, data-data tersebut yang terdapat pada database akan diambil agar da
 	Untuk form registrasi, saya menggunakan `UserCreationForm` dalam `views.py` untuk membuat form registrasi. Selanjutnya untuk 
 	bagian login, saya lakukan di dalam fungsi `views.py` dengan `authenticate` yang akan melakukan validasi berdasarkan data yang telah di register,
 	ketika *user* tersebut sudah melakukan registrasi dan password sesuai maka login sukses dan langsung ditujukan ke halaman utama `todolist`. 
-	Lalu, untuk bagian `logout` saya melakukan delete cookie yang dibuat saat pada `login` dan redirect kembali ke halaman `login`
+	Lalu, untuk bagian `logout` saya melakukan logout request dan delete cookie yang dibuat saat pada `login` dan redirect kembali ke halaman `login`
 	
 5. Membuat halaman utama `todolist` yang memuat username pengguna, tombol `Tambah Task Baru`, tombol `logout`, serta tabel berisi tanggal pembuatan task, judul task, dan deskripsi task.
 
