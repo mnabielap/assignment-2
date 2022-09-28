@@ -75,9 +75,9 @@ Selanjutnya, data-data tersebut yang terdapat pada database akan diambil agar da
 	```python
 	class Task(models.Model):
 		user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True) # user yang membuat task
-		date = models.DateField(auto_now=True)				# alokasi untuk merepresentasikan tanggal dibuatnya task
-		title = models.CharField(max_length=250)			# alokasi untuk menampung string pendek dari judul
-		description = models.TextField()					# alokasi untuk menampung string panjang dari deskripsi
+		date = models.DateField(auto_now=True)			# alokasi untuk merepresentasikan tanggal dibuatnya task
+		title = models.CharField(max_length=250)		# alokasi untuk menampung string pendek dari judul
+		description = models.TextField()			# alokasi untuk menampung string panjang dari deskripsi
 		is_finished = models.BooleanField(default=False)	# alokasi untuk mengampung status task (boolean) merupakan bonus
 	```
 	
