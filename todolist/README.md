@@ -45,10 +45,12 @@ Selanjutnya, data-data tersebut yang terdapat pada database akan diambil agar da
 1. Membuat suatu aplikasi baru bernama `todolist` di proyek tugas Django yang sudah digunakan sebelumnya.
 
 	Dilakukan dengan perintah pada CMD.
+	
 	`env\Scripts\activate.bat` 
-	^ untuk mengaktifkan environment
+	untuk mengaktifkan environment
+	
 	`python manage.py startapp todolist`
-	^ untuk membuat app baru
+	untuk membuat app baru
 
 2. Menambahkan path `todolist` sehingga pengguna dapat mengakses http://localhost:8000/todolist.
 	
