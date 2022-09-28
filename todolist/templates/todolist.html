@@ -7,7 +7,7 @@
 	<br> <br>
 	<button><a href="{% url 'todolist:create_task' %}">Create Task</a></button>
 
-	<table>
+	<table border="1">
 		<tr>
 		<th>Date Created</th>
 		<th>Title</th>
@@ -23,7 +23,7 @@
 				{% if task.is_finished %}
 					<th>Completed</th>
 				{% else %}
-					<th>In Progress</th>
+					<th>Not Completed</th>
 				{% endif %}
 			<th>
 				<form method="post" action="{% url "todolist:update-task" task.id %}" >
