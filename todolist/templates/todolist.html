@@ -1,48 +1,122 @@
-{% extends 'base.html' %}
+<!doctype html>
+<html lang="en">
 
-{% block content %}
-<div class = "todolist_page">
-	<h5>Current User: </h5>
-	<b>{{username}}</b>
-	<br> <br>
-	<button><a href="{% url 'todolist:create_task' %}">Create Task</a></button>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Todolist</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
 
-	<table border="1">
-		<tr>
-		<th>Date Created</th>
-		<th>Title</th>
-		<th>Description</th>
-		<th>Status</th>
-		<th>Actions</th>
-		</tr>
-		{% for task in tasks %}
-		<tr>
-			<th>{{task.date}}</th>
-			<th>{{task.title}}</th>
-			<th>{{task.description}}</th>
-				{% if task.is_finished %}
-					<th>Completed</th>
+
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+		
+		<nav class="navbar px-3 mb-3" style="background-image: url('https://img.freepik.com/free-vector/white-gray-geometric-pattern-background-vector_53876-136510.jpg?w=1380&t=st=1664620923~exp=1664621523~hmac=9a3ab8d25bc3d7a311af1708b5c510a1bbd937612ff69604ac8752e84fb18f57');">
+			<span class="navbar-text mb-0 h5 text-black">Signed in as {{user.username}}</span>
+			<a class="navbar-brand" href="https://id.wikipedia.org/wiki/Fakultas_Ilmu_Komputer_Universitas_Indonesia">
+				<img src="https://upload.wikimedia.org/wikipedia/id/thumb/c/c3/Makara_of_Fasilkom_UI.svg/1200px-Makara_of_Fasilkom_UI.svg.png" width="120" height="45" alt="">
+			</a>
+			<div class="btn-group" role="group">
+				<form method="post" action="{% url "todolist:create_task" %}" >
+					{% csrf_token %}
+					<button class="btn btn-primary me-3 navbar-btn" type="submit" name="create-task">
+						Create Task
+					</button>
+				</form>
+				<form action="{% url 'todolist:logout' %}">
+					{% csrf_token %}
+					<button type="submit" class="btn btn-outline-danger navbar-btn">Logout</button>
+				</form>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div class="row justify-content-around">
+				{% if tasks %}
+					{% for task in tasks %}
+							{% if task.is_finished %} 
+								<div class="card text-white bg-secondary mb-2 mt-2" style="max-width: 20rem; background-image:url(https://media.istockphoto.com/photos/yellow-and-green-defocused-blurred-motion-bright-abstract-background-picture-id1315027564?b=1&k=20&m=1315027564&s=170667a&w=0&h=-d-nkoa7T8sg268otEeo8L3cN-f8vayUrnND7Zq91io=); ">
+									<div class="card-header mt-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
+										<th>{{task.date}}</th>
+									</div>
+									<div class="card-body">
+										<h5 class="card-title text-black">{{task.title}}</h5>
+										<p class="card-text text-black">{{task.description}}</p>
+										<div class="btn-group">
+											<form method="post" action="{% url "todolist:update-task" task.id %}" >
+												{% csrf_token %}
+												<button class="btn btn-primary btn-sm me-2" type="submit" name="updatetask">
+													Mark Not Completed
+												</button>
+											</form>
+											<form method="post" action="{% url "todolist:delete-task" task.id %}" >
+												{% csrf_token %}
+												<button class="btn btn-danger btn-sm" type="submit" name="deletetask">
+													Delete
+												</button>
+											</form>
+										</div>
+									</div>
+									<div class="card-footer text-white mb-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
+										Completed
+									</div>
+								</div>
+							{% else %}
+								<div class="card text-white bg-secondary mb-2 mt-2" style="max-width: 20rem; background-image:url(https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVkJTIwZ3JhZGllbnR8ZW58MHx8MHx8&w=1000&q=80); ">
+									<div class="card-header mt-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
+										<th>{{task.date}}</th>
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">{{task.title}}</h5>
+										<p class="card-text">{{task.description}}</p>
+										<div class="btn-group">
+											<form method="post" action="{% url "todolist:update-task" task.id %}" >
+												{% csrf_token %}
+												<button class="btn btn-primary btn-sm me-2" type="submit" name="updatetask">
+													Mark Completed 
+												</button>
+											</form>
+											<form method="post" action="{% url "todolist:delete-task" task.id %}" >
+												{% csrf_token %}
+												<button class="btn btn-danger btn-sm" type="submit" name="deletetask">
+													Delete
+												</button>
+											</form>
+										</div>
+									</div>
+									<div class="card-footer text-white mb-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
+										Not Completed
+									</div>
+								</div>
+							{% endif %}
+						{% if forloop.counter|divisibleby:3 %}
+							<div class="w-100"></div>
+						{% endif %}
+					{% endfor %}
 				{% else %}
-					<th>Not Completed</th>
+					<legend class="h2 mt-1">No tasks listed yet</legend>
 				{% endif %}
-			<th>
-				<form method="post" action="{% url "todolist:update-task" task.id %}" >
-					{% csrf_token %}
-					<button class="btn btn-info btn-sm" type="submit" name="update">
-						{% if task.is_finished %} Mark Not Completed {% else %} Mark Completed {% endif %}
-					</button>
-				</form>
-				<form method="post" action="{% url "todolist:delete-task" task.id %}" >
-					{% csrf_token %}
-					<button class="btn btn-info btn-sm" type="submit" name="delete">
-						Delete
-					</button>
-				</form>
-			</th>
-		</tr>
-		{% endfor %}
-	</table>
-	<h5>Last session login: {{ last_login }}</h5>
-	<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
-</div>
-{% endblock content %}
+			</div>
+
+    </body>
+
+</html>
+
+<style>
+	.card:hover {
+		transform: scale(1.02);
+	  }
+    body {
+        background-image: url('https://i.ibb.co/RT7Hzsd/wallpaperflare-com-wallpaper.jpg');
+        text-align: center;
+    }
+    .container {
+		background-image: url('https://img.freepik.com/free-vector/blue-pink-halftone-background_53876-99004.jpg?w=1060&t=st=1664620208~exp=1664620808~hmac=e4fe3fa178957612d3ee16dbaebb7ff500612f7abac364094dc98a366ac35e76');
+        margin-top: 5%;
+        width: 68%;
+        padding: 10px;
+        border-radius: 25px;
+        display: block;
+    }
+</style>
