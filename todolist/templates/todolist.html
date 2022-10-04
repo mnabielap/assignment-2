@@ -35,61 +35,36 @@
 			<div class="row justify-content-around">
 				{% if tasks %}
 					{% for task in tasks %}
-							{% if task.is_finished %} 
-								<div class="card text-white bg-secondary mb-2 mt-2" style="max-width: 20rem; background-image:url(https://media.istockphoto.com/photos/yellow-and-green-defocused-blurred-motion-bright-abstract-background-picture-id1315027564?b=1&k=20&m=1315027564&s=170667a&w=0&h=-d-nkoa7T8sg268otEeo8L3cN-f8vayUrnND7Zq91io=); ">
-									<div class="card-header mt-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
-										<th>{{task.date}}</th>
-									</div>
-									<div class="card-body">
-										<h5 class="card-title text-black">{{task.title}}</h5>
-										<p class="card-text text-black">{{task.description}}</p>
-										<div class="btn-group">
-											<form method="post" action="{% url "todolist:update-task" task.id %}" >
-												{% csrf_token %}
-												<button class="btn btn-primary btn-sm me-2" type="submit" name="updatetask">
-													Mark Not Completed
-												</button>
-											</form>
-											<form method="post" action="{% url "todolist:delete-task" task.id %}" >
-												{% csrf_token %}
-												<button class="btn btn-danger btn-sm" type="submit" name="deletetask">
-													Delete
-												</button>
-											</form>
-										</div>
-									</div>
-									<div class="card-footer text-white mb-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
-										Completed
+							<div class="card text-white bg-secondary mb-2 mt-2" style="max-width: 20rem; background-image:url(https://media.istockphoto.com/vectors/abstract-white-modern-gradient-background-wallpaper-vector-vector-id1036762000?k=20&m=1036762000&s=170667a&w=0&h=NZgSSzWH4eZd-KiQOTVWFdmtUY6QmZFB9wiwC4AwS4Q=); ">
+								<div class="card-header mt-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
+									<th>{{task.date}}</th>
+								</div>
+								<div class="card-body">
+									<h5 class="card-title text-black">{{task.title}}</h5>
+									<p class="card-text text-black">{{task.description}}</p>
+									<div class="btn-group">
+										<form method="post" action="{% url "todolist:update-task" task.id %}" >
+											{% csrf_token %}
+											<button class="btn btn-primary btn-sm me-2" type="submit" name="updatetask">
+												{% if task.is_finished %} Mark Not Completed {% else %} Mark Completed {% endif %}
+											</button>
+										</form>
+										<form method="post" action="{% url "todolist:delete-task" task.id %}" >
+											{% csrf_token %}
+											<button class="btn btn-danger btn-sm" type="submit" name="deletetask">
+												Delete
+											</button>
+										</form>
 									</div>
 								</div>
-							{% else %}
-								<div class="card text-white bg-secondary mb-2 mt-2" style="max-width: 20rem; background-image:url(https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVkJTIwZ3JhZGllbnR8ZW58MHx8MHx8&w=1000&q=80); ">
-									<div class="card-header mt-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
-										<th>{{task.date}}</th>
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">{{task.title}}</h5>
-										<p class="card-text">{{task.description}}</p>
-										<div class="btn-group">
-											<form method="post" action="{% url "todolist:update-task" task.id %}" >
-												{% csrf_token %}
-												<button class="btn btn-primary btn-sm me-2" type="submit" name="updatetask">
-													Mark Completed 
-												</button>
-											</form>
-											<form method="post" action="{% url "todolist:delete-task" task.id %}" >
-												{% csrf_token %}
-												<button class="btn btn-danger btn-sm" type="submit" name="deletetask">
-													Delete
-												</button>
-											</form>
-										</div>
-									</div>
-									<div class="card-footer text-white mb-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
-										Not Completed
-									</div>
+								<div class="card-footer text-white mb-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
+									{% if task.is_finished %}
+										<th>Completed ✅</th>
+									{% else %}
+										<th>Not Completed ❌</th>
+									{% endif %}
 								</div>
-							{% endif %}
+							</div>
 						{% if forloop.counter|divisibleby:3 %}
 							<div class="w-100"></div>
 						{% endif %}
