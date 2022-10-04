@@ -4,6 +4,9 @@ Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu 
 
 Muhammad Nabiel Andityo Purnomo - 2106750465
 
+- [Tugas 4](#tugas-4---pengimplementasian-form-dan-autentikasi-menggunakan-django)
+- [Tugas 5](#tugas-5---web-design-using-html-css-and-css-framework)
+
 ## Tugas 4 - Pengimplementasian Form dan Autentikasi Menggunakan Django
 
 ### Link to Deployed App
@@ -141,6 +144,205 @@ Selanjutnya, data-data tersebut yang terdapat pada database akan diambil agar da
 	Hal ini dapat diimplementasikan dengan cara *user* membuat akun melalui halaman registrasi. Setelah itu, login dan
 	masuk ke halaman utama `todolist` untuk membuat tiga task dalam form `create-task` pada akun masing-masing dengan jumlah
 	dua akun.
+
+## Tugas 5 - Web Design Using HTML, CSS, and CSS Framework
+
+### Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?
+
+Perbedaan utama antara *inline CSS* dan *external CSS* adalah bahwa *inline CSS* diproses lebih cepat karena hanya memerlukan 
+browser untuk mengunduh 1 file sedangkan menggunakan *external CSS* akan memerlukan pengunduhan file HTML dan CSS secara terpisah.
+Untuk perbedaan lebih rinci saya paparkan dibawah ini<br>
+
+- __Internal CSS:__<br>
+*Internal* atau *embedded CSS* mengharuskan kita untuk menambahkan tag `<style>` di bagian `<head>` dokumen HTML kita. *Style CSS* ini adalah 
+metode yang efektif untuk menata satu halaman. Namun, menggunakan *style* ini untuk beberapa halaman memakan waktu karena kita perlu 
+menempatkan *CSS rules* di setiap halaman situs web kita.<br>
+	```html
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<style>
+			body {
+				background-color: blue;
+			}
+			h1 {
+				color: red;
+				padding: 60px;
+			} 
+			</style>
+		</head>
+		<body>
+
+			<h1>PBP Tutorials</h1>
+			<p>This is our paragraph.</p>
+
+		</body>
+	</html>
+	```
+	
+- __External CSS:__<br>
+Dengan external CSS, kita akan menautkan halaman web kita ke file `.css` eksternal, yang dapat dibuat oleh editor teks apa pun di perangkat kita 
+(mis., Notepad ). Jenis CSS ini adalah metode yang lebih efisien, terutama untuk menata situs web besar. Dengan mengedit satu file `.css`, kita 
+dapat mengubah seluruh situs sekaligus.<br><br>
+Cara untuk mengaplikasikan *external CSS* ini adalah
+1. Buat file `.css` baru dengan editor teks, dan tambahkan *style rules*. Sebagai contoh:<br>
+	```html
+	.xleftcol {
+	   float: left;
+	   width: 33%;
+	   background:#809900;
+	}
+	.xmiddlecol {
+	   float: left;
+	   width: 34%;
+	   background:#eff2df;
+	}
+	```<br>
+2. Di bagian `<head>` file HTML kita tambahkan referensi ke file `.css` eksternal kita tepat setelah tag `<title>`:<br>
+	`<link rel="stylesheet" type="text/css" href="style.css" />`
+	
+- __Inline CSS:__<br>
+*Inline CSS* digunakan untuk menata elemen HTML tertentu. Untuk *sytle CSS* ini, kita hanya perlu menambahkan *style attribute* ke setiap tag HTML, tanpa menggunakan *selector*.
+Jenis CSS ini sangat tidak disarankan, karena setiap tag HTML perlu ditata secara individual. Mengelola situs web kita mungkin menjadi terlalu sulit jika kita hanya menggunakan *Inline CSS*.
+Namun, *Inline CSS* dalam HTML dapat berguna dalam beberapa situasi. Misalnya, dalam kasus di mana kita tidak memiliki akses ke file CSS atau perlu menerapkan gaya untuk satu elemen saja.<br>
+Berikut merupakan contoh *inline CSS* ke tag `<p>` dan `<h1>`:<br>
+	```html
+	<!DOCTYPE html>
+	<html>
+		<body style="background-color:black;">
+
+			<h1 style="color:white;padding:30px;">PBP Tutorials</h1>
+			<p style="color:white;">Something usefull here.</p>
+
+		</body>
+	</html>
+	```
+
+### Jelaskan tag HTML5 yang kamu ketahui.
+
+Berikut merupakan tag dalam HTML5 yang sering dipakai
+1. __CSS dan JS__ <br>
+	Untuk melampirkan *file* css dan javascript sebagai *design* dan agar website terlihat menarik<br>
+	```html
+	<link rel="stylesheet" href="style.css" />
+	<script src="script.js"></script>
+	```
+2. __*Semantics*__<br>
+	Di HTML5 kita memiliki struktur semantik seperti `<header>`, `<footer>`, dan `<nav>` untuk contoh kode seperti ini.<br>
+	```html
+	<header>
+		...
+	</header>
+	<nav>
+		<ul>...</ul>
+	</nav>
+	<footer>
+		...
+	</footer>
+	```
+3. __*Article* dan *Section*__<br>
+	```html
+	<section>
+	....
+	</section>
+	```
+	*section tag* digunakan untuk mendefinisikan elemen html seperti header dan footer dan lainnya.<br>
+	```html
+	<article>
+	...
+	</article>
+	```
+	*article tag* digunakan untuk mendefinisikan konten independen tertentu<br>
+4. __*Input types, attributes and forms*__<br>
+	*input type* dan *attributes* baru telah diperkenalkan di HTML 5<br>
+	```html
+	<form>
+		<input name="name" required placeholder="Your name" pattern="[A-z]{7}" />
+	 
+		<input type="email" name="email" required placeholder="email@inwebson.com"/>
+	 
+		<input type="url" name="url" placeholder="Homepage URL"/>
+	 
+		<input type="number" name="age" min="18" max="99" />
+		
+	<textarea name="desc" placeholder="Describe yourself here..."></textarea>
+	  
+	   <input type="submit" value="Submit" />
+	</form>
+	```
+5. __*HTML5 editable content*__ <br>
+	HTML5 memiliki atribut baru, sekarang kita dapat mengedit konten dengan menambahkan atribut *contenteditable* ke dalamnya.<br>
+	```html
+	<div contenteditable="true">
+		content for editing
+	</div>
+	```
+6.  __*Local Storage*__<br>
+	Dengan fungsi ini, pengguna dapat mengakses data secara lokal dalam browser web. Sebelum pengguna HTML5 menyimpan data di cookie dengan setiap permintaan server.<br>
+	```html
+	<script>
+		localStorage.variableName = "value";
+		alert(localStorage.variableName);
+		localStorage.removeItem("variableName");
+		alert(localStorage.variableName);
+	</script>
+	```
+
+### Jelaskan tipe-tipe CSS selector yang kamu ketahui.
+
+*CSS selectors* digunakan untuk memilih konten yang ingin diberikan *style*. Selector adalah bagian dari *CSS rule set*. 
+Selektor CSS memilih elemen HTML sesuai dengan *id, class, type, attribute etc*.
+
+Ada beberapa jenis *CSS selectors*. di antaranya adalah:<br>
+1. __*CSS Element Selector*__<br>
+Selektor elemen memilih elemen HTML berdasarkan nama.<br>
+2. __*CSS Id Selector*__<br>
+Selector id memilih atribut id dari elemen HTML untuk memilih elemen tertentu. Id selalu unik di dalam halaman sehingga dipilih untuk memilih satu elemen unik. Itu ditulis dengan karakter hash (#), diikuti oleh id elemen.
+3. __*CSS Class Selector*__<br>
+Selektor kelas memilih elemen HTML dengan atribut kelas tertentu. Digunakan dengan karakter titik. (simbol titik penuh) diikuti dengan nama kelas.<br>
+4. __*CSS Universal Selector*__<br>
+Selektor universal digunakan sebagai karakter wildcard. Ini memilih semua elemen pada halaman.<br>
+5. __*CSS Group Selector*__<br>
+*Grouping selector* digunakan untuk memilih semua elemen dengan definisi *style* yang sama. *Grouping selector* digunakan untuk meminimalkan kode. Koma digunakan untuk memisahkan setiap selektor dalam pengelompokan.<br>
+
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
+
+1. __Kustomisasi templat HTML yang telah dibuat pada Tugas 4 dengan menggunakan CSS atau CSS framework (seperti Bootstrap, Tailwind, Bulma) dengan ketentuan sebagai berikut:__<br>
+	Untuk semua template dari setiap halaman, saya memberikan tag <head> untuk mengambil css dari bootstrap, Misal dalam halaman login<br>
+	```html
+	<head>
+		<meta charset="utf-8"> 													// untuk menerjemahkan karakter di dalam HTML sebagai UTF-8
+		<meta name="viewport" content="width=device-width, initial-scale=1">	// agar page tersebut responsive dan dapat di lihat di semua device
+		<title>Login</title>													// field judul
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+	</head>
+	```
+	Setelah itu, saya juga mengambil file JS untuk membuat konten web yang dinamis dan interaktif seperti aplikasi dan browser. Dengan cara<br>
+	```html
+	<body>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+		...
+	</body>
+	```
+	Selanjutnya dalam setiap halaman saya juga membuat navbar dengan button tertentu. Dalam setiap bagian dari halaman tersebut saya juga menambahkan background image agar tampilan menjadi lebih menarik.<br>
+	Lalu, dalam setiap page juga saya membuat container dengan style `align-items: center;` agar setiap item ditampilkan di tengah. <br>
+	Dalam setiap page saya juga memberikan attribute margin atau padding untuk menyesuaikan item tersebut agar menarik dilihat user. <br>
+	Tentu dalam setiap form harus diberikan `{% csrf_token %}` untuk memberikan proteksi data. <br>
+	Dalam page todolist, saya menampilkan form sebagai cards dan membuat fitur berwarna hijau ketika task tersebut sudah selesai dan berwarna merah ketika task tersebut belum selesai. <br>
+	Pada bagian bonus, saya membuat efek ketika melakukan hover pada cards di halaman utama todolist dengan cara menambahkan *style* berikut ini.<br>
+	```html
+	<style>
+		.card:hover {
+			transform: scale(1.02);
+		  }
+		...
+	</style>
+	```
+	
+2. __Membuat keempat halaman yang dikustomisasi menjadi responsive.__<br>
+	*Responsive web design* adalah sebuah metode atau pendekatan sistem web desain yang bertujuan memberikan pengalaman berselancar yang optimal dalam berbagai perangkat, baik mobile maupun komputer.<br>
+	Untuk mengaplikasikan hal tersebut saya menambahkan potongan kode berikut ini dalam tag `<head>`<br>
+	`<meta name="viewport" content="width=device-width, initial-scale=1">`
 
 
 ## Credits
