@@ -52,7 +52,7 @@ def logout_user(request):
 
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
-    tasks = Task.objects.filter(user=request.user)
+    tasks = Task.objects.filter(user=request.user).order_by('id')
     context = {
         'username': request.COOKIES['username'],
         'last_login': request.COOKIES['last_login'],
