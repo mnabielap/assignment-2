@@ -146,6 +146,10 @@ web JavaScript) yang berpusat pada melakukan tindakan tertentu dalam menanggapi 
 	```
 	yang berada di dalam tag `script`, dimana `function` tersebut adalah *function* yang akan di *run* ketika *document loaded*.
 	Didalamnya saya berikan pemanggilan fungsi `displayCards` untuk menampilkan *card* ketika `getJSON` sukses dipanggil.
+
+Dalam mengimplementasikan POST saya menggunakan AJAX dengan `type: 'post',` untuk menandakan bahwa itu merupakan *method* `POST` .
+Diawali oleh pengumpulan data oleh AJAX ketika tombol `Submit` di-*click*. Lalu, data dikemas dan dikirim melalui *method* `POST` berupa `JSON` ke
+`todolist/add`. Setelah proses berhasil maka model akan ditutup dan data akan di-*update* secara asinkronus.
 	
 ## Credits
 
