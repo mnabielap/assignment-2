@@ -6,100 +6,209 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Todolist</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 
 <body>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+	
+	<nav class="navbar px-3 mb-3" style="background-image: url('https://img.freepik.com/free-vector/white-gray-geometric-pattern-background-vector_53876-136510.jpg?w=1380&t=st=1664620923~exp=1664621523~hmac=9a3ab8d25bc3d7a311af1708b5c510a1bbd937612ff69604ac8752e84fb18f57');">
+		<span class="navbar-text mb-0 h5 text-black">Signed in as {{user.username}}</span>
+		<a class="navbar-brand" href="https://id.wikipedia.org/wiki/Fakultas_Ilmu_Komputer_Universitas_Indonesia">
+			<img src="https://upload.wikimedia.org/wikipedia/id/thumb/c/c3/Makara_of_Fasilkom_UI.svg/1200px-Makara_of_Fasilkom_UI.svg.png" width="120" height="45" alt="">
+		</a>
+		<div class="btn-group" role="group">
+			<button class="btn btn-primary me-3 navbar-btn" type="button" name="create-task" id="modalButton" style="border-radius: 5px;">
+				Create Task
+			</button>
+			<form action="{% url 'todolist:logout' %}">
+				{% csrf_token %}
+				<button type="submit" class="btn btn-outline-danger navbar-btn">Logout</button>
+			</form>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row justify-content-around" id="card-container"></div>
+	</div>
+
+	<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">Create Task</h3>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<form id="createTaskForm">
+					{% csrf_token %}
+					<div class="modal-body">
+						<fieldset>
+							<input class="form-control mb-3" type="text" placeholder="Task Title" name="title">
+							<textarea class="form-control mb-3" rows="5" placeholder="Description" name="description"></textarea>
+						</fieldset>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-success btnClick">Submit</button>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+<script>
+	function getFormData($form) {
+		var unindexedSerializeArray = $form.serializeArray();
+		var indexedSerializeArray = {};
+		$.map(unindexedSerializeArray, function (n, i) {
+			indexedSerializeArray[n['name']] = n['value'];
+		});
+		return indexedSerializeArray;
+	}
+
+	function displayCards(json) {
+		var cards = [];
+		$.each(json, function (index, val) {
+			var fields = val.fields
+			var divMain = document.createElement("div");
+			divMain.classList.add("card");
+			divMain.classList.add("text-white");
+			divMain.classList.add("mb-2");
+			divMain.classList.add("mt-2");
+			if (fields.is_finished) {
+				divMain.style.cssText += 'max-width: 20rem; background-image:url(https://media.istockphoto.com/photos/yellow-and-green-defocused-blurred-motion-bright-abstract-background-picture-id1315027564?b=1&k=20&m=1315027564&s=170667a&w=0&h=-d-nkoa7T8sg268otEeo8L3cN-f8vayUrnND7Zq91io=); ';
+			} else {
+				divMain.style.cssText += 'max-width: 20rem; background-image:url(https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVkJTIwZ3JhZGllbnR8ZW58MHx8MHx8&w=1000&q=80); ';
+			}
+			var card_header = document.createElement("div");
+			card_header.classList.add("card-header")
+			card_header.classList.add("mt-2")
+			card_header.style.cssText += 'background-image: url(https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=);';
+			card_header.innerHTML = fields.date;
+			divMain.appendChild(card_header);
+
+			var card_body = document.createElement("div");
+			card_body.classList.add("card-body");
+			var card_title = document.createElement("h5");
+			if (fields.is_finished) {
+				card_title.classList.add("text-black");
+			}
+			card_title.classList.add("card-title");
+			card_title.innerHTML = fields.title
+			card_body.appendChild(card_title);
+
+			var card_description = document.createElement("p");
+			card_description.classList.add("card-text");
+			if (fields.is_finished) {
+				card_description.classList.add("text-black");
+			}
+			card_description.innerHTML = fields.description;
+			card_body.appendChild(card_description)
+
+			var button_group = document.createElement("div");
+			button_group.classList.add("btn-group");
+
+			var update_button = document.createElement("button");
+			update_button.classList.add("btn");
+			update_button.classList.add("btn-primary");
+			update_button.classList.add("btn-sm");
+			update_button.classList.add("me-3");
+			update_button.style.cssText += 'border-radius: 5px;';
+			if (fields.is_finished) {
+				update_button.innerHTML = "Mark Not Completed";
+			} else {
+				update_button.innerHTML += "Mark Completed";
+			}
+			update_button.setAttribute('onclick', `switchStatus(${val.pk})`);
+			button_group.append(update_button);
+
+
+			var delete_button = document.createElement("button");
+			delete_button.classList.add("btn");
+			delete_button.classList.add("btn-danger");
+			delete_button.classList.add("btn-sm");
+			delete_button.innerHTML = "Delete";
+			delete_button.style.cssText += 'border-radius: 5px;';
+			delete_button.setAttribute('onclick', `deleteCard(${val.pk})`);
+
+			button_group.appendChild(delete_button);
+
+			card_body.appendChild(button_group)
+			divMain.append(card_body);
+
+			var card_footer = document.createElement("div");
+			card_footer.classList.add("card-footer");
+			card_footer.classList.add("text-white");
+			card_footer.classList.add("mb-2");
+			card_footer.style.cssText += 'background-image: url(https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=);';
+			if (fields.is_finished) {
+				card_footer.innerHTML = "Completed";
+			} else {
+				card_footer.innerHTML = "Not Completed";
+			}
+			divMain.append(card_footer);
+
+			cards.push(divMain.outerHTML);
+		});
 		
-		<nav class="navbar px-3 mb-3" style="background-image: url('https://img.freepik.com/free-vector/white-gray-geometric-pattern-background-vector_53876-136510.jpg?w=1380&t=st=1664620923~exp=1664621523~hmac=9a3ab8d25bc3d7a311af1708b5c510a1bbd937612ff69604ac8752e84fb18f57');">
-			<span class="navbar-text mb-0 h5 text-black">Signed in as {{user.username}}</span>
-			<a class="navbar-brand" href="https://id.wikipedia.org/wiki/Fakultas_Ilmu_Komputer_Universitas_Indonesia">
-				<img src="https://upload.wikimedia.org/wikipedia/id/thumb/c/c3/Makara_of_Fasilkom_UI.svg/1200px-Makara_of_Fasilkom_UI.svg.png" width="120" height="45" alt="">
-			</a>
-			<div class="btn-group" role="group">
-				<form method="post" action="{% url "todolist:create_task" %}" >
-					{% csrf_token %}
-					<button class="btn btn-primary me-3 navbar-btn" type="submit" name="create-task">
-						Create Task
-					</button>
-				</form>
-				<form action="{% url 'todolist:logout' %}">
-					{% csrf_token %}
-					<button type="submit" class="btn btn-outline-danger navbar-btn">Logout</button>
-				</form>
-			</div>
-		</nav>
 
-		<div class="container">
-			<div class="row justify-content-around">
-				{% if tasks %}
-					{% for task in tasks %}
-							{% if task.is_finished %} 
-								<div class="card text-white bg-secondary mb-2 mt-2" style="max-width: 20rem; background-image:url(https://media.istockphoto.com/photos/yellow-and-green-defocused-blurred-motion-bright-abstract-background-picture-id1315027564?b=1&k=20&m=1315027564&s=170667a&w=0&h=-d-nkoa7T8sg268otEeo8L3cN-f8vayUrnND7Zq91io=); ">
-									<div class="card-header mt-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
-										<th>{{task.date}}</th>
-									</div>
-									<div class="card-body">
-										<h5 class="card-title text-black">{{task.title}}</h5>
-										<p class="card-text text-black">{{task.description}}</p>
-										<div class="btn-group">
-											<form method="post" action="{% url "todolist:update-task" task.id %}" >
-												{% csrf_token %}
-												<button class="btn btn-primary btn-sm me-2" type="submit" name="updatetask">
-													Mark Not Completed
-												</button>
-											</form>
-											<form method="post" action="{% url "todolist:delete-task" task.id %}" >
-												{% csrf_token %}
-												<button class="btn btn-danger btn-sm" type="submit" name="deletetask">
-													Delete
-												</button>
-											</form>
-										</div>
-									</div>
-									<div class="card-footer text-white mb-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
-										Completed
-									</div>
-								</div>
-							{% else %}
-								<div class="card text-white bg-secondary mb-2 mt-2" style="max-width: 20rem; background-image:url(https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVkJTIwZ3JhZGllbnR8ZW58MHx8MHx8&w=1000&q=80); ">
-									<div class="card-header mt-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
-										<th>{{task.date}}</th>
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">{{task.title}}</h5>
-										<p class="card-text">{{task.description}}</p>
-										<div class="btn-group">
-											<form method="post" action="{% url "todolist:update-task" task.id %}" >
-												{% csrf_token %}
-												<button class="btn btn-primary btn-sm me-2" type="submit" name="updatetask">
-													Mark Completed 
-												</button>
-											</form>
-											<form method="post" action="{% url "todolist:delete-task" task.id %}" >
-												{% csrf_token %}
-												<button class="btn btn-danger btn-sm" type="submit" name="deletetask">
-													Delete
-												</button>
-											</form>
-										</div>
-									</div>
-									<div class="card-footer text-white mb-2" style="background-image: url('https://media.istockphoto.com/photos/abstract-composition-blurred-background-orange-pink-blue-and-light-picture-id1168786352?b=1&k=20&m=1168786352&s=170667a&w=0&h=8iMZI9V34QiQbKDRWf1zOGeZ7eS_2yev1I9eb-1XEhg=');">
-										Not Completed
-									</div>
-								</div>
-							{% endif %}
-						{% if forloop.counter|divisibleby:3 %}
-							<div class="w-100"></div>
-						{% endif %}
-					{% endfor %}
-				{% else %}
-					<legend class="h2 mt-1">No tasks listed yet</legend>
-				{% endif %}
-			</div>
+		document.getElementById("card-container").innerHTML = cards.join("");
+	}
 
-    </body>
+	function updateCards() {
+		$.getJSON("{% url 'todolist:show_todolist_json' %}", displayCards);
+	}
+
+	function switchStatus(pk) {
+		$.ajax({
+			url:`update-task/${pk}`,
+			type: 'post',
+			data: {},
+			success: updateCards,
+		});
+	}
+
+	function deleteCard(pk) {
+		$.ajax({
+			url:`delete-task/${pk}/`,
+			type: 'post',
+			data: {},
+			success: updateCards,
+		});
+	}
+
+	$(document).ready(function () {
+		$.getJSON("{% url 'todolist:show_todolist_json' %}", displayCards);
+		document.getElementById("modalButton").setAttribute('onclick', '$("#formModal").modal("show")');
+
+		$("#createTaskForm").submit(function (e) {
+			e.preventDefault();
+			$(".btnClick").prop('disabled', true);
+			$(".btnClick").text('Processing');
+			var $form = $(this);
+			var serializedData = getFormData($form);
+			$.ajax({
+				url: "{% url 'todolist:create_task_ajax' %}",
+				type: "POST",
+				data: serializedData,
+				dataType: 'text',
+				success: function (data) {
+					$(".btnClick").prop('disabled', false);
+					$(".btnClick").text('Submit');
+					$.getJSON("{% url 'todolist:show_todolist_json' %}", displayCards);
+					$("#formModal").modal('hide');
+					$('#createTaskForm').each(function () {
+						this.reset();
+					});
+				}
+			});
+		});
+	});
+</script>
+
+</body>
 
 </html>
 
@@ -119,4 +228,5 @@
         border-radius: 25px;
         display: block;
     }
+
 </style>

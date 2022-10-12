@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from todolist.forms import TaskForm
 from .models import Task
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def register(request):
@@ -75,18 +76,34 @@ def create_task(request):
     return render(request, 'create_task.html', context)
 
 @login_required(login_url='/todolist/login/')
+@csrf_exempt
 def delete_task(request, id):
     if request.method == "POST":
         task = get_object_or_404(Task, pk=id, user=request.user)
         task.delete()
-
-        return redirect(reverse('todolist:show_todolist'))
+        return JsonResponse({'error':False})
 
 @login_required(login_url='/todolist/login/')
+@csrf_exempt
 def update_status(request, id):
     if request.method == "POST":
         task = get_object_or_404(Task, pk=id, user=request.user)
         task.is_finished = not task.is_finished
         task.save()
+        return JsonResponse({'error':False})
+        
+@login_required(login_url='/todolist/login/')
+def show_todolist_json(request):
+    data = Task.objects.filter(user=request.user).order_by('id')
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+    
+@login_required(login_url='/todolist/login/')
+def create_task_ajax(request):
 
-        return redirect(reverse('todolist:show_todolist'))
+    if request.method == "POST":
+        title = request.POST['title']
+        description = request.POST['description']
+        new_item = Task.objects.create(user=request.user, title=title, description=description)
+        return JsonResponse({'error': False, 'msg':'Successful'})
+    
+    return redirect('todolist:show_todolist')
